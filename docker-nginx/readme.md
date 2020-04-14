@@ -7,7 +7,8 @@ docker build -t simple-nginx .
 
 # run container
 ```
-docker run --rm -v ${PWD}/mydir:/usr/share/nginx/html -it -p 80:80 simple-nginx
+docker run --rm -d -v ${PWD}/mydir:/usr/share/nginx/html -it -p 80:80 simple-nginx
+	-d		(run container in background)
 	-v		(volume replicate changes)
 	--rm		(remove the container one its stopped)
 	-it		(used to attach interactive TTY, tty -> text input output environment aka shell)
