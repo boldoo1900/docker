@@ -1,0 +1,42 @@
+version: '3.3'
+services:
+  php:
+    build:
+      context: './php/'
+      dockerfile: dockerfile
+      args:
+       PHP_VERSION: ${PHP_VERSION}
+    container_name: php
+    networks:
+      - backend
+    volumes:
+      - ${PROJECT_ROOT}/:/var/www/html/
+  apache:
+    build:
+      context: './apache/'
+      dockerfile: dockerfile
+      args:
+       APACHE_VERSION: ${APACHE_VERSION}
+    container_name: apache
+    networks:
+      - frontend
+      - backend
+    ports:
+      - 80:80
+    volumes:
+      - ${PROJECT_ROOT}/:/var/www/html/
+  postgres:
+    container_name: postgres
+    image: postgres:9.6
+    restart: always
+    networks:
+      - backend
+    environment:
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    ports:
+      - 5432:5432
+networks:
+  frontend:
+  backend:    
