@@ -3,20 +3,30 @@ import mysql.connector
 class Index(object):
 
     def hello(self):
-        mydb = mysql.connector.connect(
-            host="10.6.8.191",
-            user="lesson2",
-            passwd="kasemituyo3",
-            database="sakila"
-        )
+        try:
+            mydb = mysql.connector.connect(
+                # host="10.6.8.191",
+                # user="lesson",
+                # passwd="kasemituyo3",
+                # database="world"
 
-        mycursor = mydb.cursor()
+                #local case
+                host="test-mysql-container",
+                user="root",
+                passwd="123",
+                database="testdb"
+            )
 
-        mycursor.execute("SELECT * FROM actor")
+            mycursor = mydb.cursor()
 
-        myresult = mycursor.fetchall()
+            mycursor.execute("SELECT * FROM employees")
+            # mycursor.execute("select * from country limit 1")
 
-        # for x in myresult:
-        #     print(x)
+            myresult = mycursor.fetchall()
 
-        return myresult;
+            # for x in myresult:
+            #     print(x)
+
+            return myresult;
+        except:
+            return ["MYSQL ERROR!!!"]

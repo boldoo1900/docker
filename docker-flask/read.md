@@ -2,10 +2,13 @@
 
 build dockerfile
 ```
-    docker build -t simple-flask .
+docker build -t test-flask .
 ```
 
 run docker
 ```
-    docker run -p 5000:5000 -v ${PWD}/mydir:/app simple-flask
+docker run --rm -d -p 5000:5000 --name test-flask-container -v ${PWD}/mydir:/app test-flask
+
+with network 
+docker run --rm -d --network test-network -p 80:5000 -v ${PWD}/mydir:/app --name test-flask-container test-flask
 ```
