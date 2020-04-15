@@ -19,3 +19,10 @@ docker run --rm -d -v ${PWD}/mydir:/usr/share/nginx/html -it -p 80:80 simple-ngi
 ```
 docker exec -it <CONTAINER_ID> /bin/sh
 ```
+
+# docker-compose run
+```
+docker-compose run --rm -p 80:80 webserver
+```
+
+

@@ -1,0 +1,10 @@
+version: '3'
+services:
+  webserver: 
+    build: .
+    container_name: simple-nginx
+    volumes:
+      - ./mydir:/usr/share/nginx/html
+    ports:
+      - 80:80
+      
