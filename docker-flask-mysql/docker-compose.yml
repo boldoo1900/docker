@@ -20,6 +20,7 @@ services:
   db:
     image: mysql:latest
     volumes:
+        - ./data:/var/lib/mysql
         - ./sql:/docker-entrypoint-initdb.d
     container_name: mydb
     restart: always
