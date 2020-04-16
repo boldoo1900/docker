@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  whale:
+    image: docker/whalesay
+    command: cowsay "123"
+
+
+
+
+
+
+
+
+
