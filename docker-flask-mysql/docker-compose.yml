@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  web:
+    build: 
+        context: .
+        dockerfile: python/Dockerfile
+    container_name: myweb
+    ports:
+        - "5000:5000"
+    volumes:
+        - ./mydir:/app              #mount
+    environment:
+        FLASK_ENV: development      #reload the code on change
+    depends_on:
+        - db
+    networks: 
+        - my-network
+
+  db:
+    image: mysql:latest
+    volumes:
+        - ./sql:/docker-entrypoint-initdb.d
+    container_name: mydb
+    restart: always
+    ports:
+        - "3306:3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: 123
+        MYSQL_DATABASE: testdb
+        MYSQL_USER: root
+        MYSQL_PASSWORD: 123
+    networks:
+        - my-network
+
+networks: 
+    my-network:
+
