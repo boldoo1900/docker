@@ -1,1 +1,2 @@
-docker-php-mysql/data/*
+docker-php-mysql/data/master/*
+docker-php-mysql/data/slave/*
