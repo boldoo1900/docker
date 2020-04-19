@@ -1,0 +1,63 @@
+version: '3'
+
+services:
+#   web:
+#     build: 
+#         context: .
+#         dockerfile: python/Dockerfile
+#     container_name: myweb
+#     ports:
+#         - "5001:5000"
+#     volumes:
+#         - ./mydir:/app              #mount
+#     environment:
+#         FLASK_ENV: development      #reload the code on change
+#     depends_on:
+#         - db
+#     networks: 
+#         - my-network
+
+  db-master:
+    image: mysql:latest
+    volumes:
+        - ./data/master:/var/lib/mysql
+        - ./sql:/docker-entrypoint-initdb.d
+        - ./sql/mysql-master.cnf:/etc/mysql/conf.d/mysql.cnf
+    container_name: mydb-master
+    restart: always
+    ports:
+        - "3306:3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: 123
+        MYSQL_DATABASE: testdb
+        # MYSQL_USER: testuser
+        # MYSQL_PASSWORD: 123
+    networks:
+        - my-network
+
+  db-slave:
+    image: mysql:latest
+    volumes:
+        - ./data/slave:/var/lib/mysql
+        - ./sql:/docker-entrypoint-initdb.d
+        - ./sql/mysql-slave.cnf:/etc/mysql/conf.d/mysql.cnf
+    container_name: mydb-slave
+    restart: always
+    ports:
+        - "3307:3306"
+    environment:
+        MYSQL_ROOT_PASSWORD: 123
+        MYSQL_DATABASE: testdb
+        # MYSQL_USER: testuser
+        # MYSQL_PASSWORD: 123
+    networks:
+        - my-network
+    depends_on: 
+        - db-master
+        
+networks: 
+    my-network:
+        driver: bridge
+        ipam:
+          config:
+            - subnet: 172.26.0.0/16

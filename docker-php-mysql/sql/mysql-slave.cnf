@@ -1,0 +1,9 @@
+
+[mysqld]
+
+# Slave
+server-id = 11
+
+#gtid_mode=ON
+#enforce-gtid-consistency=true
+#read_only=ON
