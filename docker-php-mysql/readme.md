@@ -33,6 +33,15 @@ mysqlslap -u root -p 123 -P 3306 -h localhost --auto-generate-sql --iterations=1
 --auto-generate-sql =  automatically generate and execute SQL statements
 --iteractions = number of tests to run
 --concurrency = number of clients
+
+
+-- Small performance test, add following lines to my.cnf. It will improve average number of seconds to run queries
+innodb_buffer_pool_size=10M   
+innodb_doublewrite = 0
+innodb_flush_log_at_trx_commit= 0
+skip-log-bin
+skip_slow_query_log
+
 ```
 
 # reference
