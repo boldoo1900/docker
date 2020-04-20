@@ -43,3 +43,8 @@ https://lefred.be/content/master-slave-replication-with-mysql-8-0-in-2-mins/
 https://linuxize.com/post/how-to-configure-mysql-master-slave-replication-on-centos-7/
 
 ```
+
+# database ERD
+```
+https://www.lucidchart.com/invitations/accept/6f35e696-f65f-4071-8f7f-3e48fb8d2eb3
+```

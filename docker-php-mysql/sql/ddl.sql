@@ -22,7 +22,6 @@ CREATE TABLE IF NOT EXISTS users (
     gender char(1) NOT NULL,
     favorite_language VARCHAR(255) NOT NULL,
 	
-	
 	-- CONSTRAINT `users_chk_1` CHECK (nickname NOT LIKE '%[^A-Z]%') ,
     CONSTRAINT `users_chk_2` CHECK (LENGTH(nickname) >= 4),
     CONSTRAINT `users_chk_3` CHECK (LENGTH(password) >= 8),
@@ -46,6 +45,25 @@ END IF;
 END$$
 DELIMITER ;
 
+DROP TABLE IF EXISTS user_fav_lang_map;
+
+CREATE TABLE IF NOT EXISTS user_fav_lang_map (
+	fav_lang_map_id INT AUTO_INCREMENT PRIMARY KEY,
+	user_id INT NOT NULL,
+	favorite_language_id INT NOT NULL,
+
+    CONSTRAINT foreign_key_1_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT
+    CONSTRAINT foreign_key_1_fav_lang_id FOREIGN KEY (favorite_language_id) REFERENCES favorite_language(favorite_language_id) ON DELETE RESTRICT
+);
+
+DROP TABLE IF EXISTS favorite_language;
+
+CREATE TABLE IF NOT EXISTS favorite_language (
+	favorite_language_id INT AUTO_INCREMENT PRIMARY KEY,
+	favorite_language VARCHAR(255) NOT NULL,
+	created_at DATE,
+    updated_at DATE
+);
 
 
 DROP TABLE IF EXISTS blogs;
@@ -57,7 +75,7 @@ CREATE TABLE IF NOT EXISTS blogs (
     sub_title VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     header_image_url TEXT,
     
-    CONSTRAINT foreign_key_1_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+    CONSTRAINT foreign_key_1_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT
 );
 
 
@@ -65,11 +83,11 @@ DROP TABLE IF EXISTS articles;
 
 CREATE TABLE IF NOT EXISTS articles (
 	article_id INT AUTO_INCREMENT PRIMARY KEY,
-	user_id INT NOT NULL,
+	blog_id INT NOT NULL,
 	title VARCHAR(63) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     body TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     created_at DATE NOT NULL,
     updated_at DATE NOT NULL,
     
-    CONSTRAINT foreign_key_2_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+    CONSTRAINT foreign_key_2_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT
 );
