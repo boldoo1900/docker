@@ -18,9 +18,9 @@ CREATE TABLE IF NOT EXISTS users (
 	user_id INT AUTO_INCREMENT PRIMARY KEY,
 	nickname VARCHAR(31) NOT NULL,
 	password VARCHAR(31) NOT NULL,
-	birth_date DATE,
-    gender char(1),
-    favorite_language VARCHAR(255),
+	birth_date DATE NOT NULL,
+    gender char(1) NOT NULL,
+    favorite_language VARCHAR(255) NOT NULL,
 	
 	
 	-- CONSTRAINT `users_chk_1` CHECK (nickname NOT LIKE '%[^A-Z]%') ,
@@ -53,8 +53,8 @@ DROP TABLE IF EXISTS blogs;
 CREATE TABLE IF NOT EXISTS blogs (
 	blog_id INT AUTO_INCREMENT PRIMARY KEY,
 	user_id INT NOT NULL,
-	blog_name VARCHAR(63) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-    sub_title VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+	blog_name VARCHAR(63) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    sub_title VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
     header_image_url TEXT,
     
     CONSTRAINT foreign_key_1_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
@@ -66,10 +66,10 @@ DROP TABLE IF EXISTS articles;
 CREATE TABLE IF NOT EXISTS articles (
 	article_id INT AUTO_INCREMENT PRIMARY KEY,
 	user_id INT NOT NULL,
-	title VARCHAR(63) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-    body TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-    created_at DATE,
-    updated_at DATE,
+	title VARCHAR(63) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    body TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+    created_at DATE NOT NULL,
+    updated_at DATE NOT NULL,
     
     CONSTRAINT foreign_key_2_user_id FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );

@@ -9,3 +9,6 @@ binlog_expire_logs_seconds=604800
 #gtid_mode=ON
 #enforce-gtid-consistency=true
 
+#slow_query_log = 0
+#long_query_time = 10
+#log_queries_not_using_indexes = ON
