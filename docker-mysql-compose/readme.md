@@ -14,7 +14,7 @@ slave
 ```
 master
 CREATE USER 'repl'@'%' IDENTIFIED WITH caching_sha2_password BY '123';
-GRANT REPLICATION SLAVE ON *.* TO 'repli'@'%';
+GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%';
 
 show master status;
 
