@@ -6,6 +6,8 @@ class Article extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		Auth::isLoggedin();
+
 		$this->load->model('Article_model', 'model');
 		$this->load->model('Blog_model', 'modelBlog');
 		$this->load->model('Comment_model', 'modelComment');

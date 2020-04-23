@@ -6,6 +6,8 @@ class Comment extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		Auth::isLoggedin();
+
 		$this->load->model('Comment_model', 'model');
 
 		$this->user_id = $_SESSION["userInfo"]["user_id"];

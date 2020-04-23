@@ -10,12 +10,13 @@ class User extends CI_Controller {
 
     public function index()
 	{
-        die;
-		$this->load->view('');
+        exit();
     }
 
     public function profile()
     {
+        Auth::isLoggedin();
+        
         $user_id = $_SESSION["userInfo"]["user_id"];
         $result = $this->model->getUserById($user_id);
 
@@ -36,6 +37,7 @@ class User extends CI_Controller {
     }
 
     public function editprofile(){
+        Auth::isLoggedin();
 
         if($this->input->post('nickname') && $this->input->method() == "post"){
             $param = $this->input->post();
