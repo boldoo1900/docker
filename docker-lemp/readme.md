@@ -115,7 +115,7 @@ sudo docker-compose build/up/down/restart -d
 sudo docker-compose exec php php -m
 ```
 
-#### MySQL shell access
+### MySQL shell access
 
 ```sh
 sudo docker exec -it mysql bash
