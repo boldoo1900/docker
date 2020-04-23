@@ -24,7 +24,7 @@ class Blog extends CI_Controller {
 	public function add(){
 		$data = ["actionType" => "add",
 				 "blog_id" => "", "blog_name" => "", 
-				 "sub_title" => "", "is_public" => ""];
+				 "sub_title" => "", "is_public" => "", "header_image" => ""];
 
 		$this->load->template("blog/form", array("data" => $data));
 	}

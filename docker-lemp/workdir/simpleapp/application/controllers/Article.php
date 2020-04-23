@@ -15,7 +15,7 @@ class Article extends CI_Controller {
 		$this->user_id = $_SESSION["userInfo"]["user_id"];
 
 		// blog dropdown
-		$blogs = $this->modelBlog->getBlogsPublic($this->user_id);
+		$blogs = $this->modelBlog->getBlogsDropdown($this->user_id);
 		$blogDropdown = array("" => "---");
 		foreach($blogs as $row){
 			$blogDropdown[$row["blog_id"]] = $row["blog_name"];

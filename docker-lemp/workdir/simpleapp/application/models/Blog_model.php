@@ -10,6 +10,10 @@ class Blog_model extends CI_Model {
         return $this->db->get_where('blogs', array('is_public' => 1))->result_array();
     }
 
+    public function getBlogsDropdown($user_id){
+        return $this->db->get_where('blogs', array('is_public' => 1, "user_id" => $user_id))->result_array();
+    }
+
     public function getBlogById($blog_id){
         $result = $this->db->get_where('blogs', array('blog_id' => $blog_id))->result_array();
 
