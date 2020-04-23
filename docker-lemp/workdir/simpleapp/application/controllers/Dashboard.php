@@ -14,7 +14,7 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-		$blogs = $this->model->getBlogsPublic($this->user_id);
+		$blogs = $this->model->getBlogsPublic();
 		$this->load->template("dashboard/dashboard", array("blogs" => $blogs));
 	}
 }

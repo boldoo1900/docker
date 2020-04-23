@@ -6,8 +6,8 @@ class Blog_model extends CI_Model {
         return $this->db->get_where('blogs', array('user_id' => $user_id))->result_array();
     }
 
-    public function getBlogsPublic($user_id){
-        return $this->db->get_where('blogs', array('is_public' => 1, "user_id" => $user_id))->result_array();
+    public function getBlogsPublic(){
+        return $this->db->get_where('blogs', array('is_public' => 1))->result_array();
     }
 
     public function getBlogById($blog_id){

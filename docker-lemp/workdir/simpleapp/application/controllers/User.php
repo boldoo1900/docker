@@ -90,18 +90,18 @@ class User extends CI_Controller {
         if($this->input->method() == "post"){
             if(empty($param["email"]) || empty($param["password"])){
                 Message::add('e', 'username or password is incorrect');
-                return $this->load->view('login');
+                return $this->load->view('user/login');
             }
 
             $result = $this->model->getUserByEmail($param["email"]);
             if(empty($result)){
                 Message::add('e', 'username or password is incorrect');
-                return $this->load->view('login');
+                return $this->load->view('user/login');
             }
 
             if($result["password"] != md5($param["password"])){
                 Message::add('e', 'username or password is incorrect');
-                return $this->load->view('login');
+                return $this->load->view('user/login');
             }
 
             $_SESSION["userInfo"] = ["user_id" => $result["user_id"], "email" => $result["email"], 
