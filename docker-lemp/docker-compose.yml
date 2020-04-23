@@ -1,0 +1,82 @@
+version: '3.3'
+
+volumes:
+    phpmyadmin_data:
+
+# networks: 
+#     my-network:
+        # driver: bridge
+        # ipam:
+        #   config:
+        #     - subnet: 172.26.0.0/16
+
+services:
+    web:
+        image: nginx:alpine
+        container_name: my-nginx
+        volumes:
+            - "./config/default.conf:/etc/nginx/conf.d/default.conf"
+            - "./workdir:/var/www/html"
+            - phpmyadmin_data:/var/www/html/phpmyadmin:ro
+            # - "./etc/nginx/default.conf:/etc/nginx/conf.d/default.template"
+        ports:
+            - "8000:80"
+            # - "3000:443"  //HTTPS
+        environment:
+            - NGINX_HOST=${NGINX_HOST}
+        # command: /bin/sh -c "envsubst '$$NGINX_HOST' < /etc/nginx/conf.d/default.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+        restart: always
+        depends_on:
+            - php
+            - mydb
+        # networks:
+        #     - my-network
+
+    php:
+        build:
+            context: './config/'
+            dockerfile: php-dockerfile
+            args:
+                PHP_VERSION: ${PHP_VERSION}
+        container_name: my-php
+        restart: always
+        volumes:
+            - "./config/php.ini:/usr/local/etc/php/conf.d/php.ini"
+            - "./workdir:/var/www/html"
+        # networks:
+        #     - my-network
+
+    myadmin:
+        image: phpmyadmin/phpmyadmin:fpm-alpine
+        container_name: phpmyadmin
+        # ports:
+        #     - "8080:80"
+        environment:
+            - PMA_ARBITRARY=1
+            - PMA_HOST=${MYSQL_HOST}
+            - PMA_ABSOLUTE_URI=http://localhost/phpmyadmin/
+        restart: always
+        volumes:
+            - phpmyadmin_data:/var/www/html/
+        depends_on:
+            - mydb
+
+    mydb:
+        image: mysql:latest
+        volumes:
+            - ./data/master:/var/lib/mysql
+            - ./sql:/docker-entrypoint-initdb.d
+            - ./config/mysql-master.cnf:/etc/mysql/conf.d/mysql.cnf
+        container_name: ${MYSQL_HOST}
+        restart: always
+        ports:
+            - "3306:3306"
+        env_file: 
+            - .env
+        environment:
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        # networks:
+        #     - my-network

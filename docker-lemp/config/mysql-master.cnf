@@ -1,0 +1,21 @@
+
+[mysqld]
+
+# Master
+server-id = 10 
+log_bin = mysql-bin
+binlog_expire_logs_seconds=604800
+
+#gtid_mode=ON
+#enforce-gtid-consistency=true
+
+#slow_query_log = 0
+#long_query_time = 10
+#log_queries_not_using_indexes = ON
+
+
+#innodb_buffer_pool_size=10M   
+#innodb_doublewrite = 0
+#innodb_flush_log_at_trx_commit= 0
+#skip-log-bin
+#skip_slow_query_log
