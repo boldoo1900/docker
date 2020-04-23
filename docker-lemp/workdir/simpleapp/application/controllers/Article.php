@@ -75,7 +75,7 @@ class Article extends CI_Controller {
 			if(isset($param["actionType"]) && $param["actionType"] == "add"){
 				$data = ["blog_id" => $param["blog_id"], "title" => $param["title"],
 						 "body" => $param["body"], "is_public" => $param["is_public"],
-						 "created_at" => "now()", "updated_at" => "now()" ];
+						 "created_at" => date("Y-m-d"), "updated_at" => date("Y-m-d") ];
 
 				$result = $this->model->addArticle($data);
 				if($result){
@@ -86,7 +86,7 @@ class Article extends CI_Controller {
 			} else {
 				$data = ["blog_id" => $param["blog_id"], "title" => $param["title"],
 						 "body" => $param["body"], "is_public" => $param["is_public"],
-						 "updated_at" => "now()" ];
+						 "updated_at" => date("Y-m-d") ];
 
 				$result = $this->model->editArticle($param["article_id"], $data);
 				if($result){
