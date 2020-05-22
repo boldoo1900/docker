@@ -54,9 +54,9 @@
         <div class="col-lg-3">
             <h1 class="my-4">Categories</h1>
             <div class="list-group">
-                <a href="/profile" class="list-group-item">Profile</a>
-                <a href="/blog" class="list-group-item">Blog</a>
-                <a href="/article" class="list-group-item">Article</a>
+                <a href="/profile" id="Profile" class="list-group-item">Profile</a>
+                <a href="/blog" id="Blog" class="list-group-item">Blog</a>
+                <a href="/article" id="Article" class="list-group-item">Article</a>
             </div>
         </div>
         <div class="col-lg-9">

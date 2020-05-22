@@ -1,5 +1,5 @@
     <div class="btn-toolbar list-toolbar">
-        <a class="btn btn-primary" href="/blog/add"><i class="fa fa-plus"></i> Add</a>
+        <a class="btn btn-primary" id="blogAdd" href="/blog/add"><i class="fa fa-plus"></i> Add</a>
         <div class="btn-group"></div>
     </div><br>
 

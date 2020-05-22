@@ -15,6 +15,8 @@ Docker running Nginx, PHP-FPM, MySQL and PHPMyAdmin.
 
 3. [Reference Problems](#reference-problems)
 
+4. [Appendix](#appendix)
+
 ___
 
 ## Install prerequisites
@@ -62,6 +64,10 @@ The most important packages :
     └── simpleapp
 
 ```
+
+#### Page url
+* `localhost:8000/login`            
+* `localhost:8000/phpmyadmin/`      
 
 ### Configure Nginx 
 
@@ -119,6 +125,12 @@ sudo docker-compose exec php php -m
 
 ```sh
 sudo docker exec -it mysql bash
+
+// initialize default data
+cd docker-entrypoint-initdb.d/
+mysql -u root -p testdb < ddl.sql
+mysql -u root -p testdb < dml.sql
+
 ```
 
 
@@ -150,4 +162,19 @@ https://github.com/phpmyadmin/docker/issues/253
 location / {
     try_files $uri $uri/ /index.php?$args;
 }
+```
+
+## Appendix
+
+1. アピールポイント
+
+```sh
+ユーザー登録（Signup）ー＞　ユーザーログイン（SignIn）ー＞ユーザー編集（hobbyとか）-> ブログCRUDー＞記事CRUDー＞公開したブログの記事にコメントできると言う流れでできるようにした
+```
+
+2. 使用したデータとベースデーブルの設計
+
+```sh
+sql/ddl.sql     - 設計
+sql/dml         - データ
 ```

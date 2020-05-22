@@ -9,7 +9,7 @@
 
                     <div class="form-group">
                         <label>BLOG NAME</label>
-                        <input type="text" name="blog_name" value="<?php echo $data["blog_name"]; ?>" class="form-control" autocomplete="off">
+                        <input type="text" id="blog_name" name="blog_name" value="<?php echo $data["blog_name"]; ?>" class="form-control" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label>SUB TITLE</label>

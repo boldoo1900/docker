@@ -16,6 +16,7 @@ columns: comment_Id, article_id, posted_user_id, comment, created_at
 
 DROP TABLE IF EXISTS user_hobby_map;
 DROP TABLE IF EXISTS hobby;
+DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS articles;
 DROP TABLE IF EXISTS blogs;
 DROP TABLE IF EXISTS users;
