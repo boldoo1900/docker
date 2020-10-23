@@ -2,3 +2,4 @@ docker-php-mysql/data/master/*
 docker-php-mysql/data/slave/*
 docker-lemp/data/master/*
 docker-lemp/data/slave/*
+docker-keycloak/volumes/*

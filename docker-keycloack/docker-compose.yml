@@ -1,0 +1,70 @@
+version: '3'
+
+services:
+  # mysql1:
+  #     image: mysql:5.7
+  #     volumes:
+  #       - './volumes/keycloakdb:/var/lib/mysql'
+  #     environment:
+  #       MYSQL_ROOT_PASSWORD: root
+  #       MYSQL_DATABASE: keycloak
+  #       MYSQL_USER: keycloak
+  #       MYSQL_PASSWORD: password
+  #     ports:
+  #       - "3306:3306"
+
+  # keycloak:
+  #     image: quay.io/keycloak/keycloak:latest
+  #     environment:
+  #       DB_VENDOR: MYSQL
+  #       DB_ADDR: mysql1:3306
+  #       DB_DATABASE: keycloak
+  #       DB_USER: keycloak
+  #       DB_PASSWORD: password
+  #       KEYCLOAK_USER: admin
+  #       KEYCLOAK_PASSWORD: Pa55w0rd
+  #       # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
+  #       #JDBC_PARAMS: "connectTimeout=30000"
+      # ports:
+      #   - 8080:8080
+      # depends_on:
+      #   - mysql1
+
+  mysql_keycloak:
+    image: 'mysql:5.6'
+    volumes:
+      - './volumes/keycloakdb:/var/lib/mysql'
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysqlrootpass
+      - MYSQL_DATABASE=keycloak
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqluserpass
+    command: --skip-performance-schema
+    restart: on-failure
+    networks:
+      - console
+
+  keycloak:
+    image: jboss/keycloak
+    depends_on:
+      - mysql_keycloak
+    environment:      
+      - "DB_VENDOR=mysql"
+      - "DB_ADDR=mysql_keycloak"
+      - "DB_DATABASE=keycloak"
+      - "DB_USER=mysqluser"
+      - "DB_PASSWORD=mysqluserpass"
+      - "KEYCLOAK_USER=kadmin"
+      - "KEYCLOAK_PASSWORD=hogehoge"
+    ports:
+      - "8080:8080"
+    # volumes:
+    #   - './keycloak-db:/opt/jboss/keycloak/standalone/data'
+    # command: -Dkeycloak.migration.strategy=IGNORE_EXISTING
+    restart: on-failure
+    networks:
+      - console
+
+networks: 
+    console:
+        external: true
